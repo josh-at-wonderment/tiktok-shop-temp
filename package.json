@@ -1,0 +1,40 @@
+{
+  "name": "tiktok-shop-temp",
+  "version": "1.0.0",
+  "main": "index.jt",
+  "license": "MIT",
+  "scripts": {
+    "serve": "nodemon src/index.ts"
+  },
+  "_moduleAliases": {
+    "@": "./src"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/module-alias": "^2.0.4",
+    "@types/node": "^26.0.0",
+    "@types/pg": "^8.20.0",
+    "@types/pg-format": "^1.0.5",
+    "module-alias": "^2.3.4",
+    "nodemon": "^3.1.14",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.1081.0",
+    "auth0": "^4.16.0",
+    "axios": "^1.18.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "jwks-rsa": "^4.1.0",
+    "jwt-decode": "^4.0.0",
+    "pg": "^8.22.0",
+    "pg-format": "^1.0.4",
+    "snowflake-sdk": "^3.0.0",
+    "winston": "^3.19.0"
+  }
+}

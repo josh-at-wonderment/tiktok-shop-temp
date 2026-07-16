@@ -1,0 +1,23 @@
+{
+  "include": ["src", "types.ts"],
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
+    "esModuleInterop": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "noImplicitAny": false,
+    "declaration": true,
+    "declarationMap": true,
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
+    "types": ["node"],
+    "strictNullChecks": false
+  },
+  "exclude": ["node_modules", "./dist"]
+}
