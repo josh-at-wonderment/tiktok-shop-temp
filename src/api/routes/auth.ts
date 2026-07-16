@@ -1,7 +1,9 @@
 import { Router, Response } from "express";
+import axios from "axios";
 
 import { HttpStatusCode } from "axios";
 import { VerifiedRequest } from "../types";
+import config from "@/config";
 
 export function addAuthRoutes(app: Router) {
   const basePath = "/auth";
@@ -21,14 +23,35 @@ export function addAuthRoutes(app: Router) {
       const locale = qParams.locale;
       const shopRegion = qParams.shop_region;
 
-      console.log("JTP-2", { appKey, accessCode, locale, shopRegion });
+      // TODO - error handling
 
-      /**
-       * app_key=6kjvlkpek7hup
-       * code=TTP_q0XgewAAAAC_sDKqZzZP5xXGVz6L5MXNXaOv6SzYVLZ7X4lez8xH4yncyB3IgF6tHTfVVHk8gdFZPe19JFaLEpJ34dmjqmsr
-       * locale=en
-       * shop_region=US
-       */
+      const tokenRes = await axios.get(
+        "https://auth.tiktok-shops.com/api/v2/token/get",
+        {
+          params: {
+            app_key: config.tiktok.appKey,
+            app_secret: config.tiktok.appSecret,
+            auth_code: accessCode,
+            grant_type: "authorized_code",
+          },
+        },
+      );
+
+      // TODO - error handling
+
+      const tokenData = tokenRes?.data?.data;
+
+      const {
+        access_token: accessToken,
+        access_token_expire_in: accessTokenExpiresIn,
+        refresh_token: refreshToken,
+        refresh_token_expire_in: refreshtTokenExpiresIn,
+        open_id: openID,
+        seller_name: sellerName,
+        seller_base_region: sellerBaseRegion,
+        user_type: userType,
+        granted_scopes: grantScopes,
+      } = tokenData;
 
       return res.sendStatus(HttpStatusCode.Ok);
     },

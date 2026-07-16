@@ -23,5 +23,9 @@ export default {
   server: {
     port: requireEnv("SERVER_PORT"),
   },
+  tiktok: {
+    appKey: requireEnv("TIKTOK_APP_KEY"),
+    appSecret: requireEnv("TIKTOK_APP_SECRET"),
+  },
   corsList: process.env.CORS_LIST?.split(","),
 };
