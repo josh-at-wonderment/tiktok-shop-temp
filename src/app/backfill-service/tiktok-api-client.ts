@@ -4,7 +4,10 @@ import { getApiRequestSignature } from "@/app/auth-service";
 
 const TIKTOK_API_BASE_URL = "https://open-api.tiktokglobalshop.com";
 
-export function createTikTokApiClient(accessToken: string): AxiosInstance {
+export function createTikTokApiClient(): AxiosInstance {
+  const accessToken =
+    "TTP_W9xTVgAAAADJOwi6DD4R9mqQtJuaBKD-QlkUQWLfE2hM-tLVinNvqwckIglR7dbgF4KuoQjBue0MBGmPkj_V5sh355cUoAm5Sb5HUWnaV-IeUoCUjnUBTh0q5e2a4R9CK8MLf7zp_co";
+
   const client = axios.create({
     baseURL: TIKTOK_API_BASE_URL,
     headers: {
