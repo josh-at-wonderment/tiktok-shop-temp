@@ -16,13 +16,6 @@ export function addAuthRoutes(app: Router) {
     async (req: VerifiedRequest, res: Response) => {
       const accessCode = req.query.code as string;
 
-      /**
-       * Get access token
-       * - type
-       * - credential
-       * - return config
-       */
-
       if (!accessCode) {
         return res.sendStatus(HttpStatusCode.BadRequest);
       }

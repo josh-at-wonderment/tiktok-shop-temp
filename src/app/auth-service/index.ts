@@ -1,3 +1,4 @@
+import config from "@/config";
 import axios from "axios";
 
 export async function retrieveAndPersistAccessToken(
@@ -33,3 +34,5 @@ export async function retrieveAndPersistAccessToken(
 
   return false;
 }
+
+export async function refreshAndPersistAccessToken(refreshToken: string) {}
