@@ -7,6 +7,7 @@ import cors from "cors";
 import config from "./config";
 import logger from "./logger";
 import { addAppRoutes } from "./api";
+import { WEBHOOK_SERVICE_BASE_PATH } from "./api/routes/webhook-service";
 
 async function startServer() {
   const app = express();
@@ -15,6 +16,12 @@ async function startServer() {
   app.enable("trust proxy");
 
   app.use(cookieParser());
+
+  // Webhook signature verification needs the untouched raw bytes of the
+  // request body, so this must run before express.json() consumes the
+  // stream for every other route.
+  app.use(WEBHOOK_SERVICE_BASE_PATH, express.raw({ type: "application/json" }));
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 

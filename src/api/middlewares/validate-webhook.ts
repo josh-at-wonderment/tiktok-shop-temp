@@ -1,17 +1,21 @@
 import crypto from "node:crypto";
 import { Request, Response, NextFunction } from "express";
+import { HttpStatusCode } from "axios";
 import config from "@/config";
+
+const SIGNATURE_HEADER = "authorization";
 
 export async function validateTikTokWebhook(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const headers = req.headers;
+  const signature = req.headers[SIGNATURE_HEADER];
+  const rawBody = req.body;
 
-  const rawBody = req.body as Buffer;
-
-  console.log("JTP-0", { rawBody });
+  if (typeof signature !== "string" || !Buffer.isBuffer(rawBody)) {
+    return res.sendStatus(HttpStatusCode.Unauthorized);
+  }
 
   const expectedSignature = crypto
     .createHmac("sha256", config.tiktok.appSecret)
@@ -19,7 +23,17 @@ export async function validateTikTokWebhook(
     .update(rawBody)
     .digest("hex");
 
-  console.log("JTP-1", { headers, expectedSignature });
+  const expected = Buffer.from(expectedSignature, "utf8");
+  const received = Buffer.from(signature, "utf8");
+
+  if (
+    expected.length !== received.length ||
+    !crypto.timingSafeEqual(expected, received)
+  ) {
+    return res.sendStatus(HttpStatusCode.Unauthorized);
+  }
+
+  req.body = JSON.parse(rawBody.toString("utf8"));
 
   next();
 }
