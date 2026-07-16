@@ -12,6 +12,10 @@ export function addWebhookServiceRoutes(app: Router) {
   router.use(validateTikTokWebhook);
 
   router.post("/", async (req: VerifiedRequest, res: Response) => {
+    const body = req.body;
+
+    const { type, tts_notification_id, shop_id, timestamp, data } = req.body;
+
     res.sendStatus(HttpStatusCode.Ok);
   });
 }
