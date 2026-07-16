@@ -1,4 +1,4 @@
-import { createTikTokApiClient } from "@/app/backfill-service/tiktok-api-client";
+import { createTikTokApiClient } from "@/app/data-backfiller/tiktok-api-client";
 
 async function getActiveShops() {
   const client = createTikTokApiClient();
