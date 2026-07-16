@@ -1,7 +1,8 @@
-import { Router, Response } from "express";
+import { raw as rawBodyParser, Router, Response } from "express";
 
 import { HttpStatusCode } from "axios";
 import { VerifiedRequest } from "../types";
+import { validateTikTokWebhook } from "../middlewares/validate-webhook";
 
 export function addWebhookServiceRoutes(app: Router) {
   const basePath = "/webhook-service";
@@ -13,7 +14,7 @@ export function addWebhookServiceRoutes(app: Router) {
     const body = req.body;
     const headers = req.headers;
 
-    console.log("JTP-10", { body, headers });
+    // console.log("JTP-10", { body, headers });
 
     res.sendStatus(HttpStatusCode.Ok);
   });
