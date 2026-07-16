@@ -34,7 +34,6 @@
     "jwt-decode": "^4.0.0",
     "pg": "^8.22.0",
     "pg-format": "^1.0.4",
-    "snowflake-sdk": "^3.0.0",
     "winston": "^3.19.0"
   }
 }

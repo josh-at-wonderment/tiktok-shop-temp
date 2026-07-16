@@ -17,11 +17,11 @@ const requireEnv = (name: string): string => {
 
 export default {
   appEnv: {
-    env: process.env.NODE_ENV,
+    env: requireEnv("NODE_ENV"),
     isDev: process.env.NODE_ENV === devEnvironment,
   },
   server: {
-    port: process.env.SERVER_PORT || 8080,
+    port: requireEnv("SERVER_PORT"),
   },
   corsList: process.env.CORS_LIST?.split(","),
 };
